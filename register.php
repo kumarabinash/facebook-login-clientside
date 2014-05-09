@@ -16,18 +16,31 @@ if(isset($_POST)){
 	$query = "INSERT INTO users(name, email, password, mobile) ";
 	$query .= "VALUES ('{$name}', '{$email}', '{$password}', {$mobile}) ";
 
+	$queryprefb = "SELECT * FROM users WHERE email='{$email}' and userfbid={$userfbid} ";
 	$queryfb = "INSERT INTO users(name, fb, email, userfbid) ";
 	$queryfb .= "VALUES('{$name}', {$fb}, '{$email}', {$userfbid})";
 
 	if(isset($password)){
 		$result = mysql_query($query);
 	} elseif(isset($fb)){
-		$result = mysql_query($queryfb);
+		$resultprefb = mysql_query($queryprefb);
+		if($resultprefb){
+			if(mysql_num_rows($resultprefb)==0){
+				$result = mysql_query($queryfb);
+			} else {
+				$row=mysql_fetch_assoc($resultprefb);
+				session_start();
+				$_SESSION['email'] = $row['email'];
+				$_SESSION['name'] = $row['name'];
+			}
+		}
 	}
 
 	if($result){
 		session_start();
 		$_SESSION['email'] = $email;
+		$_SESSION['name'] = $name;
+		header("Location:index.php");
 	} else {
 		echo mysql_error();
 	}

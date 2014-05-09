@@ -67,9 +67,9 @@ function bringInfo(){
 		<div class="col-lg-5 col-lg-offset-3">
 		<?php 
 			if(isset($_SESSION['email'])){
-					echo "hello user " . $_SESSION['email'];
+					echo "Hello ".$_SESSION['name'] . ", your registered email is " . $_SESSION['email'];
 					?>
-					<a href="logout.php">Logout</a>
+					<a class="btn btn-warning" href="logout.php">Logout</a>
 					<?php
 			} else {
 				?>
@@ -106,7 +106,7 @@ function bringInfo(){
         		<h3>Or</h3>
         		<br>
         		<h4>You can also login with these social plugins</h4>
-        		<button type="button" class="btn btn-info">Login With Facebook</button>
+        		<button type="button" class="btn btn-info" onclick="fbcall();">Login With Facebook</button>
         	</div>
         </div>
       </div>

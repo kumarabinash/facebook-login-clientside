@@ -5,7 +5,6 @@ if(isset($_POST)){
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 
-	
 
 	$query = "SELECT * FROM users WHERE email='{$email}' AND password='{$password}' LIMIT 1";
 	$result = mysql_query($query);
