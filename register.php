@@ -34,6 +34,8 @@ if(isset($_POST)){
 				$_SESSION['name'] = $row['name'];
 			}
 		}
+	} else {
+		echo mysql_error();
 	}
 
 	if($result){
